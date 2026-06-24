@@ -603,9 +603,10 @@
     </section>
   </main>
 
+  <script src="config.js"></script>
   <script defer src="https://unpkg.com/lucide@latest"></script>
   <script>
-    const SHEETS_ENDPOINT = "";
+    const SHEETS_ENDPOINT = String(window.SHEETS_ENDPOINT || "").trim();
 
     const devices = [
       {

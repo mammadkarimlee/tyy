@@ -14,16 +14,16 @@ GitHub Pages-də işləyən mobil uyğun anonim müəllim sorğusu.
 6. Execute as: `Me`
 7. Who has access: `Anyone`
 8. Deploy edin və Web app URL-ni kopyalayın.
-9. `index.html` faylında bu sətri tapın:
+9. `config.js` faylında bu sətri tapın:
 
 ```js
-const SHEETS_ENDPOINT = "";
+window.SHEETS_ENDPOINT = "";
 ```
 
 URL-ni dırnaqların içinə qoyun:
 
 ```js
-const SHEETS_ENDPOINT = "https://script.google.com/macros/s/.../exec";
+window.SHEETS_ENDPOINT = "https://script.google.com/macros/s/.../exec";
 ```
 
 ## 2. GitHub Pages
@@ -38,4 +38,4 @@ Səhifə adətən 1-2 dəqiqəyə aktiv olur.
 
 ## Qeyd
 
-CSV yükləmə hazırda bağlıdır. Cavabların toplanması üçün `SHEETS_ENDPOINT` mütləq əlavə olunmalıdır.
+CSV yükləmə hazırda bağlıdır. Cavabların toplanması üçün `config.js` içində `window.SHEETS_ENDPOINT` mütləq əlavə olunmalıdır.
