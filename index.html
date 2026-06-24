@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="az">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teknoloji Yerinde Yeterince</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #121826;
+      --muted: #667085;
+      --line: #e1e6ef;
+      --paper: #ffffff;
+      --soft: #f7f9fd;
+      --violet: #7c3aed;
+      --blue: #116bff;
+      --green: #10a66f;
+      --amber: #f3a712;
+      --coral: #f36b4f;
+      --shadow: 0 20px 48px rgba(18, 24, 38, 0.13);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 320px;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(135deg, rgba(17, 107, 255, 0.08), transparent 28%),
+        linear-gradient(225deg, rgba(243, 167, 18, 0.16), transparent 32%),
+        linear-gradient(180deg, #fbfcff 0, #f6f8fd 48%, #fff8eb 100%);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      min-height: 48px;
+      border: 0;
+      border-radius: 8px;
+      padding: 12px 18px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--violet), var(--blue));
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 12px 26px rgba(17, 107, 255, 0.23);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #6930d8, #0958df);
+    }
+
+    button:disabled {
+      cursor: wait;
+      opacity: 0.72;
+    }
+
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    button:focus-visible,
+    summary:focus-visible {
+      outline: 3px solid rgba(17, 107, 255, 0.22);
+      outline-offset: 2px;
+    }
+
+    .shell {
+      width: min(1040px, 100%);
+      margin: 0 auto;
+      padding: 14px 14px 28px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      min-height: 252px;
+      padding: 24px;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(18, 24, 38, 0.95), rgba(28, 47, 97, 0.9)),
+        linear-gradient(125deg, #7c3aed 0%, #116bff 36%, #10a66f 72%, #f3a712 100%);
+      box-shadow: var(--shadow);
+      display: grid;
+      align-content: end;
+      gap: 14px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 18px 18px auto auto;
+      width: min(42vw, 310px);
+      aspect-ratio: 1.45;
+      border: 2px solid rgba(255, 255, 255, 0.42);
+      border-radius: 8px;
+      background:
+        linear-gradient(90deg, transparent 18%, rgba(255, 255, 255, 0.18) 18% 20%, transparent 20% 38%, rgba(255, 255, 255, 0.18) 38% 40%, transparent 40% 58%, rgba(255, 255, 255, 0.18) 58% 60%, transparent 60%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05));
+      opacity: 0.8;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .pill {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      backdrop-filter: blur(8px);
+    }
+
+    .pill svg,
+    button svg,
+    h2 svg {
+      flex: 0 0 auto;
+      width: 18px;
+      height: 18px;
+      stroke-width: 2.35;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 32px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 6px 10px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.86rem;
+      font-weight: 800;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(2.25rem, 10vw, 4.6rem);
+      line-height: 0.94;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+
+    h1 span {
+      display: block;
+    }
+
+    .lead {
+      max-width: 680px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      line-height: 1.52;
+      font-weight: 600;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .band {
+      border: 1px solid rgba(217, 222, 234, 0.88);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.92)),
+        var(--paper);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      line-height: 1.28;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hint {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.45;
+    }
+
+    .quick-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .device-block {
+      display: grid;
+      gap: 10px;
+      border: 1px solid var(--device-border);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, var(--device-tint), #fff 62%),
+      #fff;
+      padding: 12px;
+      box-shadow: 0 12px 26px rgba(18, 24, 38, 0.06);
+      min-width: 0;
+      width: 100%;
+    }
+
+    .device-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 34px;
+      font-weight: 900;
+    }
+
+    .device-icon {
+      flex: 0 0 34px;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--device-color);
+      color: #fff;
+      box-shadow: 0 10px 18px var(--device-shadow);
+    }
+
+    .device-icon svg {
+      width: 19px;
+      height: 19px;
+      stroke-width: 2.4;
+    }
+
+    fieldset {
+      min-width: 0;
+      min-inline-size: 0;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    legend {
+      padding: 0;
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .choice {
+      position: relative;
+      min-width: 0;
+    }
+
+    .choice input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .choice span {
+      display: grid;
+      min-height: 46px;
+      place-items: center;
+      border: 1px solid var(--device-border);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.78);
+      color: #344054;
+      padding: 6px 8px;
+      text-align: center;
+      font-size: 0.88rem;
+      font-weight: 850;
+      line-height: 1.16;
+      cursor: pointer;
+      transition: 140ms ease;
+    }
+
+    .choice input:focus-visible + span {
+      outline: 3px solid rgba(17, 107, 255, 0.22);
+      outline-offset: 2px;
+    }
+
+    .choice input:checked + span {
+      border-color: var(--device-color);
+      background: linear-gradient(135deg, var(--device-color), #172033);
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px var(--device-shadow);
+    }
+
+    .reflection-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    label.field {
+      display: grid;
+      gap: 7px;
+      color: #30384c;
+      font-size: 0.92rem;
+      font-weight: 800;
+    }
+
+    select,
+    textarea {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      padding: 10px 12px;
+    }
+
+    select {
+      appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+        linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+      background-position:
+        calc(100% - 18px) 21px,
+        calc(100% - 12px) 21px;
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+      padding-right: 34px;
+    }
+
+    textarea {
+      min-height: 82px;
+      resize: vertical;
+      grid-column: 1 / -1;
+    }
+
+    .submit-band {
+      position: sticky;
+      bottom: 0;
+      z-index: 5;
+      display: grid;
+      gap: 10px;
+      border-color: rgba(217, 222, 234, 0.72);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+    }
+
+    .submit-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .message {
+      min-height: 23px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+    .message.ok {
+      color: var(--green);
+    }
+
+    .message.warn {
+      color: #9b4f08;
+    }
+
+    .success-view {
+      display: grid;
+      gap: 18px;
+      margin-top: 14px;
+      text-align: center;
+      justify-items: center;
+      padding: 34px 20px;
+    }
+
+    .success-view[hidden] {
+      display: none;
+    }
+
+    .success-icon {
+      display: grid;
+      place-items: center;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      color: #fff;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      box-shadow: 0 18px 32px rgba(16, 166, 111, 0.23);
+    }
+
+    .success-icon svg {
+      width: 38px;
+      height: 38px;
+      stroke-width: 2.4;
+    }
+
+    .success-view h2 {
+      justify-content: center;
+      font-size: clamp(1.65rem, 7vw, 2.4rem);
+    }
+
+    .success-view p {
+      max-width: 440px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.55;
+      font-weight: 650;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 760px) {
+      .shell {
+        padding: 10px 10px 20px;
+      }
+
+      .hero {
+        min-height: 265px;
+        padding: 20px;
+      }
+
+      .hero::before {
+        inset: 14px 14px auto auto;
+        width: 175px;
+        opacity: 0.45;
+      }
+
+      .hero h1,
+      .lead {
+        max-width: 330px;
+      }
+
+      .band {
+        padding: 14px;
+      }
+
+      .section-head,
+      .submit-row {
+        display: grid;
+      }
+
+      .choice-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .reflection-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .submit-row button {
+        width: 100%;
+      }
+    }
+
+    @media (min-width: 761px) {
+      h1 span {
+        display: inline;
+      }
+
+      h1 span + span::before {
+        content: " ";
+      }
+    }
+
+    @media (max-width: 390px) {
+      .choice span {
+        font-size: 0.84rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <span class="pill"><i data-lucide="shield-check"></i>Anonim sorğu</span>
+      <h1><span>Teknoloji</span><span>Yerinde</span><span>Yeterince</span></h1>
+      <p class="lead">Ad, məktəb və fənn toplanmır. Sadəcə cihazlardan istifadə müddəti və bir kiçik dəyişiklik qərarı.</p>
+      <div class="hero-badges" aria-label="Sorğu detalları">
+        <span class="hero-badge"><i data-lucide="timer"></i>30 saniyə</span>
+        <span class="hero-badge"><i data-lucide="lock-keyhole"></i>Anonim cavab</span>
+      </div>
+    </header>
+
+    <form id="survey-form">
+      <section class="band" aria-labelledby="quick-title">
+        <div class="section-head">
+          <div>
+            <h2 id="quick-title"><i data-lucide="activity"></i>Adi gündə istifadə</h2>
+            <p class="hint">Hər cihaz üçün ən yaxın müddəti seçin.</p>
+          </div>
+        </div>
+        <div class="quick-list" id="quick-list"></div>
+      </section>
+
+      <section class="band" aria-labelledby="reflection-title">
+        <div class="section-head">
+          <div>
+            <h2 id="reflection-title"><i data-lucide="target"></i>Bu həftə üçün qərar</h2>
+            <p class="hint">Kiçik, real və yoxlanıla bilən bir addım seçin.</p>
+          </div>
+        </div>
+
+        <div class="reflection-grid">
+          <label class="field">
+            Nəyi azaldıram?
+            <select name="reduce">
+              <option value="">Seçilməyib</option>
+              <option>Telefon</option>
+              <option>Televiziya</option>
+              <option>Kompüter</option>
+              <option>Tablet</option>
+              <option>Heç biri</option>
+            </select>
+          </label>
+          <label class="field">
+            Nəyi artırıram?
+            <select name="increase">
+              <option value="">Seçilməyib</option>
+              <option>Kitab / mütaliə</option>
+              <option>Ailə ilə vaxt</option>
+              <option>Hərəkət / gəzinti</option>
+              <option>Yuxu rejimi</option>
+              <option>Dərs hazırlığı</option>
+            </select>
+          </label>
+          <label class="field">
+            Qısa qeyd
+            <textarea name="note" maxlength="180" placeholder="İstəyə bağlı bir cümlə"></textarea>
+          </label>
+        </div>
+      </section>
+
+      <section class="band submit-band" aria-label="Göndərmə">
+        <div class="submit-row">
+          <p class="message" id="message" aria-live="polite"></p>
+          <button type="submit" id="submit-button">Cavabı göndər<i data-lucide="send"></i></button>
+        </div>
+      </section>
+    </form>
+
+    <section class="band success-view" id="success-view" hidden aria-live="polite">
+      <div class="success-icon"><i data-lucide="circle-check"></i></div>
+      <h2>Təşəkkürlər!</h2>
+      <p>Cavabınız anonim şəkildə qeydə alındı. Pəncərəni bağlaya və ya yeni cavab göndərə bilərsiniz.</p>
+      <button type="button" id="new-response-button"><i data-lucide="rotate-ccw"></i>Yeni cavab</button>
+    </section>
+  </main>
+
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    const SHEETS_ENDPOINT = "";
+
+    const devices = [
+      {
+        key: "phone",
+        label: "Telefon",
+        icon: "smartphone",
+        color: "#7c3aed",
+        tint: "#f4efff",
+        border: "#ded2ff",
+        shadow: "rgba(124, 58, 237, 0.22)"
+      },
+      {
+        key: "tv",
+        label: "Televiziya",
+        icon: "tv",
+        color: "#116bff",
+        tint: "#eef5ff",
+        border: "#cfe0ff",
+        shadow: "rgba(17, 107, 255, 0.2)"
+      },
+      {
+        key: "computer",
+        label: "Kompüter",
+        icon: "laptop",
+        color: "#10a66f",
+        tint: "#edfbf5",
+        border: "#c9efdf",
+        shadow: "rgba(16, 166, 111, 0.2)"
+      },
+      {
+        key: "tablet",
+        label: "Tablet",
+        icon: "tablet",
+        color: "#f36b4f",
+        tint: "#fff1ed",
+        border: "#ffd5cb",
+        shadow: "rgba(243, 107, 79, 0.2)"
+      }
+    ];
+
+    const durations = [
+      { value: "0-30", label: "0-30 dəq" },
+      { value: "30-60", label: "30-60 dəq" },
+      { value: "1-2", label: "1-2 saat" },
+      { value: "2-4", label: "2-4 saat" },
+      { value: "4+", label: "4+ saat" }
+    ];
+
+    const form = document.querySelector("#survey-form");
+    const quickList = document.querySelector("#quick-list");
+    const message = document.querySelector("#message");
+    const submitButton = document.querySelector("#submit-button");
+    const successView = document.querySelector("#success-view");
+    const newResponseButton = document.querySelector("#new-response-button");
+
+    function refreshIcons() {
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    }
+
+    function renderQuickInputs() {
+      quickList.innerHTML = devices.map((device) => `
+        <fieldset class="device-block" style="--device-color: ${device.color}; --device-tint: ${device.tint}; --device-border: ${device.border}; --device-shadow: ${device.shadow};">
+          <legend class="device-head">
+            <span class="device-icon" aria-hidden="true"><i data-lucide="${device.icon}"></i></span>
+            ${device.label}
+          </legend>
+          <div class="choice-grid">
+            ${durations.map((duration) => `
+              <label class="choice">
+                <input type="radio" name="quick_${device.key}" value="${duration.value}" required>
+                <span>${duration.label}</span>
+              </label>
+            `).join("")}
+          </div>
+        </fieldset>
+      `).join("");
+    }
+
+    function setMessage(text, type = "") {
+      message.textContent = text;
+      message.className = `message ${type}`.trim();
+    }
+
+    function showSuccess() {
+      form.hidden = true;
+      successView.hidden = false;
+      refreshIcons();
+      successView.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function getFormPayload() {
+      const data = new FormData(form);
+      const quick = {};
+
+      devices.forEach((device) => {
+        quick[device.key] = data.get(`quick_${device.key}`) || "";
+      });
+
+      return {
+        submittedAt: new Date().toISOString(),
+        anonymous: true,
+        quick,
+        reduce: data.get("reduce") || "",
+        increase: data.get("increase") || "",
+        note: String(data.get("note") || "").trim()
+      };
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!form.reportValidity()) return;
+
+      if (!SHEETS_ENDPOINT) {
+        setMessage("Google Sheets bağlantısı aktiv deyil. Əvvəl endpoint URL-ni əlavə edin.", "warn");
+        return;
+      }
+
+      const payload = getFormPayload();
+      submitButton.disabled = true;
+      setMessage("Göndərilir...");
+
+      try {
+        await fetch(SHEETS_ENDPOINT, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+
+        form.reset();
+        setMessage("", "ok");
+        showSuccess();
+      } catch (error) {
+        setMessage("Göndərmək alınmadı. İnternet bağlantısını yoxlayın.", "warn");
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+
+    newResponseButton.addEventListener("click", () => {
+      successView.hidden = true;
+      form.hidden = false;
+      form.reset();
+      setMessage("");
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    renderQuickInputs();
+    refreshIcons();
+    window.addEventListener("load", refreshIcons);
+  </script>
+</body>
+</html>
