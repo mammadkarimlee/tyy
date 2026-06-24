@@ -1,4 +1,5 @@
 const SHEET_NAME = "Responses";
+const SPREADSHEET_ID = "1iAAaRjPWFKVzw2gHaDmFiqwe-rLXESTs60LZJ5DKVr8";
 
 function doPost(e) {
   const sheet = getSheet();
@@ -14,7 +15,7 @@ function doPost(e) {
 }
 
 function getSheet() {
-  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
   return spreadsheet.getSheetByName(SHEET_NAME) || spreadsheet.insertSheet(SHEET_NAME);
 }
 
